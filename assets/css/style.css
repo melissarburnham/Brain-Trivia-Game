@@ -1,0 +1,9 @@
+body {
+    background-image: url("../images/brain.jpg");
+    background-repeat: no-repeat;
+    background-position: top right;
+}
+
+h1 {
+    font-size: 50px;
+}
