@@ -13,34 +13,44 @@
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <!-- favicon link -->
     <link rel="icon" type="image/ico" href="assets/images/favicon.ico">
+     <!-- Link to the jQuery Library -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
-<body>
-    <div class="container">
-        <div class="row">
-            <h1>Brain Trivia</h1>
-        </div>
-          
-        <div class="row">
-            <span id = "timeRemaining"></span>
-        </div>
-        <div class="row">
-            <span id = "question"></span>
-        </div>
-        <div class="row">
-            <span id = "answerOne"></span>
-        </div>
-        <div class="row">
-            <span id = "answerTwo"></span>
-        </div>
-        <div class="row">
-            <span id = "answerThree"></span> 
-        </div>
-        <div class="row">
-            <span id = "answerFour"></span>
-        </div>
-    </div>
+    <body>
+        <div id="quizContainer" class="container">
+            <div class="row">
+                <h1>Brain Trivia</h1>
+            </div>
+            
+            <div class="btnContainer">
+                <button type="button" class="btn btn-default btn-lg btn-primary startBtn">START</button>
+            </div>
 
-    	<!--JS link -->
-	<script src="assets/javascript/game.js"></script>
-</body>
+            <div class="row">
+                <div class="col-md-12">
+                    <span id="timeRemaining"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm -12 col-md-12 col-lg-12">
+                    <div id="question"></div>
+                    <p class="answerChoices" id="answerChoices"></p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm -12 col-md-12 col-lg-12">
+                    <div id="correct" class="gameData"></div>
+                    <div id="incorrect" class="gameData"></div>
+                    <div id="unanswered" class="gameData"></div>
+                </div>
+            </div>
+
+          
+
+            <!--JS links -->
+        <script src="assets/javascript/app.js"></script>
+        <script src="assets/javascript/questions.js"></script>
+    </body>  
 </html>
