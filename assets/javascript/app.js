@@ -47,22 +47,31 @@ var unansweredCounter = 0;
 var intervalId;
 var userClick;
 var time = 20;
+var question;
+var answerOptions;
 
 
 // window.onload = function() {
 //     $("#start").on("click", timer.start);
 // }
 
-//create buttons for answer options
-// $(".answerChoice").on("click", function(userClick) {
-//     if(userClick==answer){
-//         //move onto next question, restart timer, add to right results 
-//     }else if(timer == 0){
-//         //move onto next question, restart timer, add to unanswered results 
-//     }else {
-//         //move onto next question, restart timer, add to unanswered results 
-//     }
-// });
+
+//Need to do
+    //create for loop to loop through the questions and display corresponding answer choices
+    //create buttons for each answer choice
+        // $("__________").on("click", function(userClick) {
+        //     if(userClick==answer){
+        //         //move onto next question, restart timer, add to right results 
+        //     }else if(timer == 0){
+        //         //move onto next question, restart timer, add to unanswered results 
+        //     }else {
+        //         //move onto next question, restart timer, add to unanswered results 
+        //     }
+        // });
+    //once all questions have gone through, dispay game stats with a restart button    
+
+
+
 
 
 function startGame(){
