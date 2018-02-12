@@ -38,7 +38,7 @@ var questionBank = [{
 }, {
     "question": "This brain region is responisble for internal regulation--temperature change, eating, and sleeping.",
     "options": ["hypothalamus", "thalamus", "basolateral amygdala", "septum"],
-    "answer": "hypthalamus"
+    "answer": "hypothalamus"
 }];
 
 var correctCounter = 0;
@@ -46,7 +46,7 @@ var wrongCounter = 0;
 var unansweredCounter = 0;
 var intervalId;
 var userClick;
-var time = 30;
+var time = 20;
 
 
 // window.onload = function() {
@@ -69,53 +69,54 @@ function startGame(){
 
 }
 
+function question1 (){
+    intervalId = setInterval(timer, 1000);
+
+    var newDiv = $("<div>");
+    newDiv.html(questionBank[0].question);
+
+    $("#question").append(newDiv);
+}
+
+function answer1 (){
+    for (var i = 0; i < questionBank[0].options.length; i++){
+    var answerDiv = $("<div>");
+    
+    answerDiv.html(questionBank[0].options[i]);
+
+    $("#answerChoices").append(answerDiv);
+    }
+}  
+   
+
 function gamePlay(){
     $(".startBtn").on("click", function(){
         $("button").remove(".startBtn");
         question1();
+        answer1();
     });
 }
 
 gamePlay();
 
-function question1 (){
-    var newDiv = $("<div>");
-    newDiv.html(questionBank[0].question);
-
-    $("#question").append(newDiv);
-    intervalId = setInterval(timer, 1000);
-
-}
-
-function displayQuestion(){
-    var questionDiv = $("#question");
-
-    for (var i = 0; i < questionBank.length; i++){
-        var answerDiv = $("<div>" + questionBank[i] + "</div>");
-        questionDiv.append(answerDiv);
-        
-    }
-}
-
 function timer(){
     time --;
-    console.log(time);
 
     if(time === 0){
         clearInterval(intervalId);
     }
-    $("#timeRemaining").html(time);
+    $("#timeRemaining").html(time + " seconds");
 }
 
 
 
 // var timer = {
 
-//     time: 30,
+//     time: 20,
   
 //     reset: function() {
   
-//       timer.time = 30;
+//       timer.time = 20;
      
 //     }
 // }
@@ -158,6 +159,17 @@ function timeConverter(t) {
 
 
 
+
+// ATTEMPT TO CREATE A FOR LOOP TO RUN THROUGH QUESTIONS
+    // function displayQuestion(){
+    //     var questionDiv = $("#question");
+    
+    //     for (var i = 0; i < questionBank.length; i++){
+    //         var answerDiv = $("<div>" + questionBank[i] + "</div>");
+    //         questionDiv.append(answerDiv);
+            
+    //     }
+    // }
 
 
 
