@@ -1,44 +1,46 @@
 //variables
+window.onload = function() {
+
 var questionBank = [{
-    "question": "Which lobe of the brain is responsible for visual information?",
-    "options": ["frontal", "temporal", "parietal", "occipital"],
-    "answer": "occipital"
+    question: "Which lobe of the brain is responsible for visual information?",
+    option: ["frontal", "temporal", "parietal", "occipital"],
+    answer: "occipital"
 }, {
-    "question": "Which lobe of the brain is repsonsible for making decisions?",
-    "options": ["frontal", "temporal", "parietal", "occipital"],
-    "answer": "frontal"
+    question: "Which lobe of the brain is repsonsible for making decisions?",
+    option: ["frontal", "temporal", "parietal", "occipital"],
+    answer: "frontal"
 }, {
-    "question": "At what age is the brain fully developed?",
-    "options": ["18", "21", "25", "For men, never."],
-    "answer": "25"
+    question: "At what age is the brain fully developed?",
+    option: ["18", "21", "25", "For men, never."],
+    answer: "25"
 }, {
-    "question": "Which brain region is repsonsible for spatial memeory?",
-    "options": ["amygdala", "pre-frontal cortex", "hippocampus", "locus coeruleus"],
-    "answer": "hippocampus"
+    question: "Which brain region is repsonsible for spatial memeory?",
+    option: ["amygdala", "pre-frontal cortex", "hippocampus", "locus coeruleus"],
+    answer: "hippocampus"
 }, {
-    "question": "Loss of cells in this region results in Parkinson's disease.",
-    "options": ["hippocampus", "amygdala",  "substantia nigra", "pre-fontal cortex"],
-    "answer": "substantia nigra"
+    question: "Loss of cells in this region results in Parkinson's disease.",
+    option: ["hippocampus", "amygdala",  "substantia nigra", "pre-fontal cortex"],
+    answer: "substantia nigra"
 }, {
-    "question": "Lesions of this area result in Urbach-Wiethe (fearless) disease.",
-    "options": ["amygdala", "pre-frontal cortex",  "hippocampus", "ventral tegmental area"],
-    "answer": "amygdala"
+    question: "Lesions of this area result in Urbach-Wiethe (fearless) disease.",
+    option: ["amygdala", "pre-frontal cortex",  "hippocampus", "ventral tegmental area"],
+    answer: "amygdala"
 }, {
-    "question": "Which is the last lobe to develop?",
-    "options": ["frontal", "temporal", "parietal", "occipital"],
-    "answer": "frontal"
+    question: "Which is the last lobe to develop?",
+    option: ["frontal", "temporal", "parietal", "occipital"],
+    answer: "frontal"
 }, {
-    "question": "This brain region is the major relay station for all sensory except smell.",
-    "options": ["hypothalamus", "thalamus", "ventral tegmental area", "orbital frontal cortex"],
-    "answer": "thalamus"
+    question: "This brain region is the major relay station for all sensory except smell.",
+    option: ["hypothalamus", "thalamus", "ventral tegmental area", "orbital frontal cortex"],
+    answer: "thalamus"
 }, {
-    "question": "If you suffered a concussion and experience disorganized thoughts and problems with vision, which two lobes were impacted during the injury?",
-    "options": ["occipital and temporal lobes", "parietal and frontal lobes", "frontal and temporal lobes", "occipital and frontal lobes"],
-    "answer": "occipital and frontal lobes"
+    question: "If you suffered a concussion and experience disorganized thoughts and problems with vision, which two lobes were impacted during the injury?",
+    option: ["occipital and temporal lobes", "parietal and frontal lobes", "frontal and temporal lobes", "occipital and frontal lobes"],
+    answer: "occipital and frontal lobes"
 }, {
-    "question": "This brain region is responisble for internal regulation--temperature change, eating, and sleeping.",
-    "options": ["hypothalamus", "thalamus", "basolateral amygdala", "septum"],
-    "answer": "hypothalamus"
+    question: "This brain region is responisble for internal regulation--temperature change, eating, and sleeping.",
+    option: ["hypothalamus", "thalamus", "basolateral amygdala", "septum"],
+    answer: "hypothalamus"
 }];
 
 var correctCounter = 0;
@@ -47,7 +49,7 @@ var unansweredCounter = 0;
 var intervalId;
 var userClick;
 var time = 3;
-var question;
+var currentQuestion = 0;
 var answerOptions;
 
 
@@ -76,25 +78,29 @@ var answerOptions;
 
 // function startGame(){
 // }
-window.onload = function() {
-function dispayQuiz(){
+
+
+function displayQuestion(currentQuestion){
+
     intervalId = setInterval(timer, 1000);
-    for (var i = 0; i < questionBank.length; i++){
+    console.log(currentQuestion);
+
+    $("#question").text(questionBank[currentQuestion].question);
+
+    for (var i = 0; i < questionBank[currentQuestion].option.length; i++){
 
         var newDiv = $("<div>");
-        newDiv.attr("class", "questions");
-        newDiv.html(questionBank[i].question);
+        newDiv.attr("data-value", questionBank[currentQuestion].option[i]);
+        newDiv.attr("class", "options");
+        newDiv.html(questionBank[currentQuestion].option[i]);
         $("#question").append(newDiv);
     }
-    
-    for (var j = 0; j < this.length; j++){
-        var optionDiv = $("<div>");
-        optionDiv.attr("class", "optionDiv");
-        optionDiv.html(this.options[j]);
-    
-        $(".answerChoices").append(optionDiv);     
-    }
 }    
+
+//one click function 
+//console.log value of data attribute of answer buttons --if this.attr(dataname) == questionbank[currentquestion].answer up winCounter
+//function that compares value of userchoice to correct answer in object array
+//loadquestion--erase div, and increment currentQuestion
 
 function nextQuestion (){
     if (timer === 0){
@@ -105,7 +111,7 @@ function nextQuestion (){
 function gamePlay(){
     $(".startBtn").on("click", function(){
         $("button").remove(".startBtn");
-        dispayQuiz();
+        displayQuestion(currentQuestion);
     });
 }
 
