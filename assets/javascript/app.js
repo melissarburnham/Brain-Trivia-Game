@@ -46,12 +46,12 @@ var wrongCounter = 0;
 var unansweredCounter = 0;
 var intervalId;
 var userClick;
-var time = 20;
+var time = 3;
 var question;
 var answerOptions;
 
 
-// window.onload = function() {
+// 
 //     $("#start").on("click", timer.start);
 // }
 
@@ -70,39 +70,42 @@ var answerOptions;
         // });
     //once all questions have gone through, dispay game stats with a restart button    
 
+//create a for loop that loops through questionBank and displays each questions. append .options with a "this"
 
 
 
-
-function startGame(){
-
-}
-
-function question1 (){
+// function startGame(){
+// }
+window.onload = function() {
+function dispayQuiz(){
     intervalId = setInterval(timer, 1000);
+    for (var i = 0; i < questionBank.length; i++){
 
-    var newDiv = $("<div>");
-    newDiv.html(questionBank[0].question);
-
-    $("#question").append(newDiv);
-}
-
-function answer1 (){
-    for (var i = 0; i < questionBank[0].options.length; i++){
-    var answerDiv = $("<div>");
-    
-    answerDiv.html(questionBank[0].options[i]);
-
-    $("#answerChoices").append(answerDiv);
+        var newDiv = $("<div>");
+        newDiv.attr("class", "questions");
+        newDiv.html(questionBank[i].question);
+        $("#question").append(newDiv);
     }
-}  
-   
+    
+    for (var j = 0; j < this.length; j++){
+        var optionDiv = $("<div>");
+        optionDiv.attr("class", "optionDiv");
+        optionDiv.html(this.options[j]);
+    
+        $(".answerChoices").append(optionDiv);     
+    }
+}    
+
+function nextQuestion (){
+    if (timer === 0){
+        intervalId = setInterval(timer, 3000);
+    }
+}
 
 function gamePlay(){
     $(".startBtn").on("click", function(){
         $("button").remove(".startBtn");
-        question1();
-        answer1();
+        dispayQuiz();
     });
 }
 
@@ -117,6 +120,7 @@ function timer(){
     $("#timeRemaining").html(time + " seconds");
 }
 
+}
 
 
 // var timer = {
@@ -130,24 +134,24 @@ function timer(){
 //     }
 // }
 
-function timeConverter(t) {
+// function timeConverter(t) {
 
-    var minutes = Math.floor(t / 60);
-    var seconds = t - (minutes * 60);
+//     var minutes = Math.floor(t / 60);
+//     var seconds = t - (minutes * 60);
 
-    if (seconds < 10) {
-      seconds = "0" + seconds;
-    }
+//     if (seconds < 10) {
+//       seconds = "0" + seconds;
+//     }
 
-    if (minutes === 0) {
-      minutes = "00";
-    }
-    else if (minutes < 10) {
-      minutes = "0" + minutes;
-    }
+//     if (minutes === 0) {
+//       minutes = "00";
+//     }
+//     else if (minutes < 10) {
+//       minutes = "0" + minutes;
+//     }
 
-    return minutes + ":" + seconds;
-  };
+//     return minutes + ":" + seconds;
+//   };
 
 
 //start button to start game
@@ -213,6 +217,3 @@ function timeConverter(t) {
     //         //move onto next question, restart timer, add to unanswered results 
     //     }
     // });
-
-
-
