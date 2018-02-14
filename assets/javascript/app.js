@@ -85,21 +85,30 @@ function displayQuestion(currentQuestion){
     intervalId = setInterval(timer, 1000);
     console.log(currentQuestion);
 
+    //loops through questionBank array, displays quesiton, creates div for and displays answers
     $("#question").text(questionBank[currentQuestion].question);
-
+    
     for (var i = 0; i < questionBank[currentQuestion].option.length; i++){
 
-        var newDiv = $("<div>");
+        var newDiv = $("<div type = button>");
         newDiv.attr("data-value", questionBank[currentQuestion].option[i]);
         newDiv.attr("class", "options");
         newDiv.html(questionBank[currentQuestion].option[i]);
         $("#question").append(newDiv);
     }
-}    
+    //on click event for answer choices
+    $(".options").on("click", function(){
+        console.log($(this).data('value') );
+        if($(this).data('value')===questionBank[currentQuestion].answer){
+            correctCounter++;
+            console.log(correctCounter);
+        }
+    });
+}
 
-//one click function 
-//console.log value of data attribute of answer buttons --if this.attr(dataname) == questionbank[currentquestion].answer up winCounter
-//function that compares value of userchoice to correct answer in object array
+    
+//on click function 
+
 //loadquestion--erase div, and increment currentQuestion
 
 function nextQuestion (){
@@ -111,7 +120,10 @@ function nextQuestion (){
 function gamePlay(){
     $(".startBtn").on("click", function(){
         $("button").remove(".startBtn");
+        timer();
         displayQuestion(currentQuestion);
+        // chooseAnswer();
+        
     });
 }
 
