@@ -11,8 +11,8 @@ var questionBank = [{
     answer: "frontal"
 }, {
     question: "At what age is the brain fully developed?",
-    option: ["18", "21", "25", "For men, never."],
-    answer: "25"
+    option: [18, 21, 25, "For me, never."],
+    answer: 25
 }, {
     question: "Which brain region is repsonsible for spatial memeory?",
     option: ["amygdala", "pre-frontal cortex", "hippocampus", "locus coeruleus"],
@@ -48,9 +48,10 @@ var wrongCounter = 0;
 var unansweredCounter = 0;
 var intervalId;
 var userClick;
-var time = 3;
+var time = 10;
 var currentQuestion = 0;
 var answerOptions;
+var clockRunning = false;
 
 
 // 
@@ -102,10 +103,21 @@ function displayQuestion(currentQuestion){
         if($(this).data('value')===questionBank[currentQuestion].answer){
             correctCounter++;
             console.log(correctCounter);
+            loadQuestion();
         }
     });
 }
 
+function loadQuestion (){
+    time = 10;
+    $("#question").empty();
+    $(".options").empty();
+    $("#timeRemaining").empty();
+    clearInterval(intervalId);
+    currentQuestion++;
+    displayQuestion(currentQuestion);
+    timer();
+};
     
 //on click function 
 
@@ -122,7 +134,6 @@ function gamePlay(){
         $("button").remove(".startBtn");
         timer();
         displayQuestion(currentQuestion);
-        // chooseAnswer();
         
     });
 }
@@ -135,6 +146,7 @@ function timer(){
     if(time === 0){
         clearInterval(intervalId);
     }
+    
     $("#timeRemaining").html(time + " seconds");
 }
 
