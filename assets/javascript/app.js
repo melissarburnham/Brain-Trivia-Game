@@ -52,10 +52,12 @@ var time = 10;
 var currentQuestion = 0;
 var answerOptions;
 var clockRunning = false;
+var picTimer;
 
 function displayQuestion(currentQuestion){
 
     intervalId = setInterval(timer, 1000);
+
     console.log(currentQuestion);
 
     //loops through questionBank array, displays quesiton, creates div for and displays answers
@@ -76,11 +78,13 @@ function displayQuestion(currentQuestion){
         if($(this).data('value')===questionBank[currentQuestion].answer){
             correctCounter++;
             console.log("correctCounter" + correctCounter);
-            loadQuestion();
+            displayCorrectPic();
+            // loadQuestion();
         } else{
             wrongCounter++;
             console.log("wrongCounter" + wrongCounter);
-            loadQuestion();
+            displayWrongPic();
+            // loadQuestion();
         }
     });
 }
@@ -92,26 +96,27 @@ function loadQuestion (){
     $("#timeRemaining").empty();
     clearInterval(intervalId);
     currentQuestion++;
-    displayQuestion(currentQuestion);
     timer();
+    displayQuestion(currentQuestion);
 };
-
-// function timerRunsOut (){
-//     if (timer === 0){
-//         loadQuestion();
-//     }
-// }
 
 function gamePlay(){
     $(".startBtn").on("click", function(){
         $("button").remove(".startBtn");
-        timer();
-        // timerRunsOut();
-        displayQuestion(currentQuestion);  
+        displayQuestion(currentQuestion);
+        timer();  
     });
 }
 
-gamePlay();
+function displayCorrectPic(){
+    $("#question").html("YOU ARE CORRECT!" + "<br>" + '<img src="assets/images/correct.gif">');
+    picTimer = setTimeout(loadQuestion, 3000); 
+}
+
+function displayWrongPic(){
+    $("#question").html("YOU ARE WRONG!" + "<br>" + '<img src="assets/images/wrong.gif">');
+    picTimer = setTimeout(loadQuestion, 3000); 
+}
 
 function timer(){
     time --;
@@ -125,5 +130,20 @@ function timer(){
     
     $("#timeRemaining").html(time + " seconds");
 }
+
+// function picTimer(){
+//     var picTimer = 3;
+//     picTimer--;
+//     if(picTimer === 0){
+//         $("#question").empty();
+//         $(".options").empty();
+//         $("#timeRemaining").empty();
+//         clearInterval(intervalId);
+//         currentQuestion++;
+//         displayQuestion(currentQuestion);
+//     }
+// }
+
+gamePlay();
 
 }
