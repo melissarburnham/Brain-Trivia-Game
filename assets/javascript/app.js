@@ -82,25 +82,27 @@ function displayQuestion(currentQuestion){
             correctCounter++;
             console.log("correctCounter " + correctCounter);
             displayCorrectPic();
-            // loadQuestion();
         } else{
             wrongCounter++;
             console.log("wrongCounter " + wrongCounter);
             displayWrongPic();
-            // loadQuestion();
         }
     });
 }
 
 function loadQuestion (){
+    if (currentQuestion == 9){
+        statsDisplay();
+    }else{
     time = 1;
     $("#question").empty();
     $(".options").empty();
     $("#timeRemaining").empty();
+    $("#timeRemaining").show();
     clearInterval(intervalId);
-    statsDisplay();
     currentQuestion++;
     displayQuestion(currentQuestion);
+    }
 };
 
 function gamePlay(){
@@ -112,11 +114,15 @@ function gamePlay(){
 }
 
 function displayCorrectPic(){
+    clearInterval(intervalId);
+    $("#timeRemaining").hide();
     $("#question").html("YOU ARE CORRECT!" + "<br>" + '<img src="assets/images/correct.gif">');
     picTimer = setTimeout(loadQuestion, 3000); 
 }
 
 function displayWrongPic(){
+    clearInterval(intervalId);
+    $("#timeRemaining").hide();
     $("#question").html("YOU ARE WRONG!" + "<br>" + "Correct answer is " + questionBank[currentQuestion].answer
     + "<br>" + '<img src="assets/images/wrong.gif">');
     picTimer = setTimeout(loadQuestion, 3000); 
@@ -135,15 +141,23 @@ function timer(){
     $("#timeRemaining").html(time + " seconds");
 }
 
-function statsDisplay(){
-    if (currentQuestion == 9){   
-        
+function statsDisplay(){    
     $("#question").empty();
     $(".options").empty();
     $("#timeRemaining").remove();
-    $("#questions").text(unansweredCounter);
-    }
+    $("#question").html("Correct Answers: " + correctCounter + "<br>" + "Wrong Answers: " + wrongCounter + "<br>"
+    + "Unanswered Questions: " + unansweredCounter);
+    $("#question").append("<br>" + restart);
 }
+    
+
+    var restart = $("<button>");
+    restart.text("RESTART");
+    restart.addClass("restartBtn");
+    restart.attr("data-name", "restart")
+   $(document).on("click", ".restartBtn", gamePlay);
+
+   
 
 gamePlay();
 
