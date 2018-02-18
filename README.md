@@ -5,7 +5,7 @@ Click [here](https://melissarburnham.github.io/Brain-Trivia-Game/) for a live ve
 ## Description
 * Use of HTML, CSS, Javascript, and jQuery. 
 * Responsive page
-* Use of multi-dimensional arrays, for loops, if statements, events and buttons
+* Use of multi-dimensional arrays, timers, for loops, if statements, events and buttons
 
 ## Game Rules
 * Answer the questions before time runs out.
