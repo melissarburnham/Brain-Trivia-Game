@@ -54,6 +54,7 @@ var answerOptions;
 var isQuestionDisplaying = true;
 var picTimer;
 
+ //displays timer, loops through questionBank array, displays question, creates div for and displays answers
 function displayQuestion(currentQuestion){
 
     intervalId = setInterval(timer, 1000);
@@ -62,7 +63,6 @@ function displayQuestion(currentQuestion){
 
     console.log("currentquestion " + currentQuestion);
 
-    //loops through questionBank array, displays quesiton, creates div for and displays answers
     $("#question").text(questionBank[currentQuestion].question);
     
     for (var i = 0; i < questionBank[currentQuestion].option.length; i++){
@@ -90,6 +90,7 @@ function displayQuestion(currentQuestion){
     });
 }
 
+//function to reset screen for each question after user guesses and pic displays
 function loadQuestion (){
     if (currentQuestion == 9){
         statsDisplay();
@@ -105,6 +106,7 @@ function loadQuestion (){
     }
 };
 
+//function that starts the game
 function gamePlay(){
     $(".startBtn").on("click", function(){
         $("button").remove(".startBtn");
@@ -113,6 +115,7 @@ function gamePlay(){
     });
 }
 
+//function if user guesses correctly
 function displayCorrectPic(){
     clearInterval(intervalId);
     $("#timeRemaining").hide();
@@ -120,6 +123,7 @@ function displayCorrectPic(){
     picTimer = setTimeout(loadQuestion, 3000); 
 }
 
+//function if user guesses incorrectly
 function displayWrongPic(){
     clearInterval(intervalId);
     $("#timeRemaining").hide();
@@ -128,6 +132,7 @@ function displayWrongPic(){
     picTimer = setTimeout(loadQuestion, 3000); 
 }
 
+//function for the timer and if user doesn't answer
 function timer(){
     time --;
 
@@ -141,8 +146,7 @@ function timer(){
     $("#timeRemaining").html(time + " seconds");
 }
 
-
-
+//function that displays number of correct or incorrect answers and restart button
 function statsDisplay(){   
     $("#question").empty();
     $(".options").empty();
@@ -166,7 +170,7 @@ function statsDisplay(){
         displayQuestion(currentQuestion);
     });
 }
-
+//calls the start of the game
 gamePlay();
 
 }
