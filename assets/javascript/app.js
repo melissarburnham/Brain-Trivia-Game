@@ -141,23 +141,31 @@ function timer(){
     $("#timeRemaining").html(time + " seconds");
 }
 
-function statsDisplay(){    
+
+
+function statsDisplay(){   
     $("#question").empty();
     $(".options").empty();
     $("#timeRemaining").remove();
     $("#question").html("Correct Answers: " + correctCounter + "<br>" + "Wrong Answers: " + wrongCounter + "<br>"
-    + "Unanswered Questions: " + unansweredCounter);
-    $("#question").append("<br>" + restart);
-}
+    + "Unanswered Questions: " + unansweredCounter + "<br>");
     
-
     var restart = $("<button>");
     restart.text("RESTART");
     restart.addClass("restartBtn");
     restart.attr("data-name", "restart")
-   $(document).on("click", ".restartBtn", gamePlay);
-
-   
+    $("#question").append(restart);
+    
+    restart.on("click", function(){
+        currentQuestion = 0;
+        correctCounter = 0;
+        wrongCounter = 0;
+        unansweredCounter = 0;
+        clearInterval(intervalId);
+        
+        displayQuestion(currentQuestion);
+    });
+}
 
 gamePlay();
 
