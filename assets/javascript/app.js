@@ -48,7 +48,7 @@ var wrongCounter = 0;
 var unansweredCounter = 0;
 var intervalId;
 var userClick;
-var time = 1;
+var time = 20;
 var currentQuestion = 0;
 var answerOptions;
 var isQuestionDisplaying = true;
@@ -56,10 +56,11 @@ var picTimer;
 
  //displays timer, loops through questionBank array, displays question, creates div for and displays answers
 function displayQuestion(currentQuestion){
-
+   
+    time = 20;
     intervalId = setInterval(timer, 1000);
-
     $("#timeRemaining").html(time + " seconds");
+    $("#timeRemaining").show();
 
     console.log("currentquestion " + currentQuestion);
 
@@ -95,7 +96,7 @@ function loadQuestion (){
     if (currentQuestion == 9){
         statsDisplay();
     }else{
-    time = 1;
+    time = 20;
     $("#question").empty();
     $(".options").empty();
     $("#timeRemaining").empty();
@@ -120,7 +121,7 @@ function displayCorrectPic(){
     clearInterval(intervalId);
     $("#timeRemaining").hide();
     $("#question").html("YOU ARE CORRECT!" + "<br>" + '<img src="assets/images/correct.gif">');
-    picTimer = setTimeout(loadQuestion, 3000); 
+    picTimer = setTimeout(loadQuestion, 4000); 
 }
 
 //function if user guesses incorrectly
@@ -150,7 +151,7 @@ function timer(){
 function statsDisplay(){   
     $("#question").empty();
     $(".options").empty();
-    $("#timeRemaining").remove();
+    $("#timeRemaining").hide();
     $("#question").html("Correct Answers: " + correctCounter + "<br>" + "Wrong Answers: " + wrongCounter + "<br>"
     + "Unanswered Questions: " + unansweredCounter + "<br>");
     
@@ -165,7 +166,6 @@ function statsDisplay(){
         correctCounter = 0;
         wrongCounter = 0;
         unansweredCounter = 0;
-        clearInterval(intervalId);
         
         displayQuestion(currentQuestion);
     });
