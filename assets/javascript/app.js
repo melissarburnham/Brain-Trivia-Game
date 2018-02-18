@@ -11,7 +11,7 @@ var questionBank = [{
     answer: "hypothalamus"
 }, {
     question: "3) At what age is the brain fully developed?",
-    option: [18, 21, 25, "For me, never."],
+    option: [18, 21, 25, "For men, never."],
     answer: 25
 }, {
     question: "4) Which brain region is repsonsible for spatial memeory?",
@@ -48,17 +48,19 @@ var wrongCounter = 0;
 var unansweredCounter = 0;
 var intervalId;
 var userClick;
-var time = 10;
+var time = 1;
 var currentQuestion = 0;
 var answerOptions;
-var clockRunning = false;
+var isQuestionDisplaying = true;
 var picTimer;
 
 function displayQuestion(currentQuestion){
 
     intervalId = setInterval(timer, 1000);
 
-    console.log(currentQuestion);
+    $("#timeRemaining").html(time + " seconds");
+
+    console.log("currentquestion " + currentQuestion);
 
     //loops through questionBank array, displays quesiton, creates div for and displays answers
     $("#question").text(questionBank[currentQuestion].question);
@@ -71,18 +73,19 @@ function displayQuestion(currentQuestion){
         newDiv.html(questionBank[currentQuestion].option[i]);
         $("#question").append(newDiv);
     }
+
     //on click event for answer choices
     $(".options").on("click", function(){
         console.log($(this).data('value') );
         //if answer choice equals correct answer...
         if($(this).data('value')===questionBank[currentQuestion].answer){
             correctCounter++;
-            console.log("correctCounter" + correctCounter);
+            console.log("correctCounter " + correctCounter);
             displayCorrectPic();
             // loadQuestion();
         } else{
             wrongCounter++;
-            console.log("wrongCounter" + wrongCounter);
+            console.log("wrongCounter " + wrongCounter);
             displayWrongPic();
             // loadQuestion();
         }
@@ -90,13 +93,13 @@ function displayQuestion(currentQuestion){
 }
 
 function loadQuestion (){
-    time = 10;
+    time = 1;
     $("#question").empty();
     $(".options").empty();
     $("#timeRemaining").empty();
     clearInterval(intervalId);
+    statsDisplay();
     currentQuestion++;
-    timer();
     displayQuestion(currentQuestion);
 };
 
@@ -104,7 +107,7 @@ function gamePlay(){
     $(".startBtn").on("click", function(){
         $("button").remove(".startBtn");
         displayQuestion(currentQuestion);
-        timer();  
+         
     });
 }
 
@@ -125,24 +128,21 @@ function timer(){
         clearInterval(intervalId);
         unansweredCounter++;
         loadQuestion();
-        console.log("unanswered" + unansweredCounter);
+        console.log("unanswered " + unansweredCounter);
     }
-    
+
     $("#timeRemaining").html(time + " seconds");
 }
 
-// function picTimer(){
-//     var picTimer = 3;
-//     picTimer--;
-//     if(picTimer === 0){
-//         $("#question").empty();
-//         $(".options").empty();
-//         $("#timeRemaining").empty();
-//         clearInterval(intervalId);
-//         currentQuestion++;
-//         displayQuestion(currentQuestion);
-//     }
-// }
+function statsDisplay(){
+    if (currentQuestion == 9){   
+        
+    $("#question").empty();
+    $(".options").empty();
+    $("#timeRemaining").remove();
+    $("#questions").text(unansweredCounter);
+    }
+}
 
 gamePlay();
 
