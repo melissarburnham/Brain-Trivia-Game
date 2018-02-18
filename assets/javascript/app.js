@@ -117,7 +117,8 @@ function displayCorrectPic(){
 }
 
 function displayWrongPic(){
-    $("#question").html("YOU ARE WRONG!" + "<br>" + '<img src="assets/images/wrong.gif">');
+    $("#question").html("YOU ARE WRONG!" + "<br>" + "Correct answer is " + questionBank[currentQuestion].answer
+    + "<br>" + '<img src="assets/images/wrong.gif">');
     picTimer = setTimeout(loadQuestion, 3000); 
 }
 
