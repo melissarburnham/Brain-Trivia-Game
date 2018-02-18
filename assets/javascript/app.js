@@ -1,6 +1,6 @@
-//variables
 window.onload = function() {
-
+    
+//variables
 var questionBank = [{
     question: "1) Which lobe of the brain is responsible for visual information?",
     option: ["frontal", "temporal", "parietal", "occipital"],
@@ -120,7 +120,7 @@ function gamePlay(){
 function displayCorrectPic(){
     clearInterval(intervalId);
     $("#timeRemaining").hide();
-    $("#question").html("YOU ARE CORRECT!" + "<br>" + '<img src="assets/images/correct.gif">');
+    $("#question").html("YOU ARE CORRECT!" + "<br>" + '<img src="assets/images/correct.gif" class="img-responsive">');
     picTimer = setTimeout(loadQuestion, 4000); 
 }
 
@@ -129,7 +129,7 @@ function displayWrongPic(){
     clearInterval(intervalId);
     $("#timeRemaining").hide();
     $("#question").html("YOU ARE WRONG!" + "<br>" + "Correct answer is " + questionBank[currentQuestion].answer
-    + "<br>" + '<img src="assets/images/wrong.gif">');
+    + "<br>" + '<img src="assets/images/wrong.gif" class="img-responsive">');
     picTimer = setTimeout(loadQuestion, 3000); 
 }
 

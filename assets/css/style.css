@@ -13,7 +13,7 @@ h1 {
 .options{
     border: solid 2px black;
     border-radius: 25px; 
-    width: 250px;
+    width: 270px;
     height: 50px;
     margin-bottom: 5px;
     font-size: 30px;
@@ -21,8 +21,9 @@ h1 {
 }
 
 #question {
+    width: 600px;
     font-size: 50px;
-    background-color: rgba(255, 255, 255, 0.575);
+    background-color: rgba(255, 255, 255, 0.705);
    
 }
 
