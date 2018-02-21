@@ -133,6 +133,14 @@ function displayWrongPic(){
     picTimer = setTimeout(loadQuestion, 3000); 
 }
 
+function displayUnansweredPic(){
+    clearInterval(intervalId);
+    $("#timeRemaining").hide();
+    $("#question").html("You didn't answer!" + "<br>" + "Correct answer is " + questionBank[currentQuestion].answer
+    + "<br>" + '<img src="assets/images/unanswered.gif" class="img-responsive">');
+    picTimer = setTimeout(loadQuestion, 3000); 
+}
+
 //function for the timer and if user doesn't answer
 function timer(){
     time --;
@@ -140,7 +148,8 @@ function timer(){
     if(time === 0){
         clearInterval(intervalId);
         unansweredCounter++;
-        loadQuestion();
+        displayUnansweredPic();
+        // loadQuestion();
         console.log("unanswered " + unansweredCounter);
     }
 
