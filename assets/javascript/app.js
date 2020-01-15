@@ -2,7 +2,7 @@ window.onload = function() {
 
 //variables
 var questionBank = [{
-    question: "1) Which lobe of the brain is responsible for visual INFORMATION?",
+    question: "1) Which lobe of the brain is responsible for visual information?",
     option: ["frontal", "temporal", "parietal", "occipital"],
     answer: "occipital"
 }, {
