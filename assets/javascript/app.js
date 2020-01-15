@@ -2,7 +2,7 @@ window.onload = function() {
 
 //variables
 var questionBank = [{
-    question: "1) Which lobe of the brain is responsible for visual information?",
+    question: "1) Which lobe of the brain is responsible for visual INFORMATION?",
     option: ["frontal", "temporal", "parietal", "occipital"],
     answer: "occipital"
 }, {
@@ -56,7 +56,7 @@ var picTimer;
 
  //displays timer, loops through questionBank array, displays question, creates div for and displays answers
 function displayQuestion(currentQuestion){
-   
+
     time = 20;
     intervalId = setInterval(timer, 1000);
     $("#timeRemaining").html(time + " seconds");
@@ -65,7 +65,7 @@ function displayQuestion(currentQuestion){
     console.log("currentquestion " + currentQuestion);
 
     $("#question").text(questionBank[currentQuestion].question);
-    
+
     for (var i = 0; i < questionBank[currentQuestion].option.length; i++){
 
         var newDiv = $("<div type = button>");
@@ -112,7 +112,7 @@ function gamePlay(){
     $(".startBtn").on("click", function(){
         $("button").remove(".startBtn");
         displayQuestion(currentQuestion);
-         
+
     });
 }
 
@@ -121,7 +121,7 @@ function displayCorrectPic(){
     clearInterval(intervalId);
     $("#timeRemaining").hide();
     $("#question").html("YOU ARE CORRECT!" + "<br>" + '<img src="assets/images/correct.gif" class="img-responsive">');
-    picTimer = setTimeout(loadQuestion, 4000); 
+    picTimer = setTimeout(loadQuestion, 4000);
 }
 
 //function if user guesses incorrectly
@@ -130,7 +130,7 @@ function displayWrongPic(){
     $("#timeRemaining").hide();
     $("#question").html("YOU ARE WRONG!" + "<br>" + "Correct answer is " + questionBank[currentQuestion].answer
     + "<br>" + '<img src="assets/images/wrong.gif" class="img-responsive">');
-    picTimer = setTimeout(loadQuestion, 3000); 
+    picTimer = setTimeout(loadQuestion, 3000);
 }
 
 function displayUnansweredPic(){
@@ -138,7 +138,7 @@ function displayUnansweredPic(){
     $("#timeRemaining").hide();
     $("#question").html("You didn't answer!" + "<br>" + "Correct answer is " + questionBank[currentQuestion].answer
     + "<br>" + '<img src="assets/images/unanswered.gif" class="img-responsive">');
-    picTimer = setTimeout(loadQuestion, 3000); 
+    picTimer = setTimeout(loadQuestion, 3000);
 }
 
 //function for the timer and if user doesn't answer
@@ -157,25 +157,25 @@ function timer(){
 }
 
 //function that displays number of correct or incorrect answers and restart button
-function statsDisplay(){   
+function statsDisplay(){
     $("#question").empty();
     $(".options").empty();
     $("#timeRemaining").hide();
     $("#question").html("Correct Answers: " + correctCounter + "<br>" + "Wrong Answers: " + wrongCounter + "<br>"
     + "Unanswered Questions: " + unansweredCounter + "<br>");
-    
+
     var restart = $("<button>");
     restart.text("RESTART");
     restart.addClass("restartBtn");
     restart.attr("data-name", "restart")
     $("#question").append(restart);
-    
+
     restart.on("click", function(){
         currentQuestion = 0;
         correctCounter = 0;
         wrongCounter = 0;
         unansweredCounter = 0;
-        
+
         displayQuestion(currentQuestion);
     });
 }
